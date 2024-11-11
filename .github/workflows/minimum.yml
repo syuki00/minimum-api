@@ -1,0 +1,46 @@
+name: minimum_workflows
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      # GitHub SecretsからGCPの設定情報を取得
+      GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+    steps:
+      # リポジトリのコードをクローン
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Google Cloud SDKをセットアップ
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      # Terraformをセットアップ
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.0  # 使用するTerraformのバージョンを指定
+
+      # terraform initを実行して初期化
+      - name: Terraform Init
+        run: terraform init
+
+      # terraform planを実行して計画を確認
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      # 確認後、terraform applyを実行
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'  # mainブランチのみでapplyを実行
+        run: terraform apply -input=false tfplan
