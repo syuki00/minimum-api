@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Actions Test
-        shell: bash
+        # shell: bash
         run: echo "test"
 
     # env:
