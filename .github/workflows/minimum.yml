@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: Actions Test
-      shell: bash
-      run: echo "test"
+      - name: Actions Test
+        shell: bash
+        run: echo "test"
 
     # env:
     #   # GitHub SecretsからGCPの設定情報を取得
