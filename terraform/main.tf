@@ -10,7 +10,8 @@ terraform {
 
 # terraformで利用するプロバイダーの設定
 provider "google" {
-  #credentials = file(var.credentials_file)
+  credentials = file("gcloud_credentials.json")
+  #file(var.credentials_file)
   #file("gcloud_credentials.json")
   #file("/home/yshida/.config/gcloud/application_default_credentials.json") 
   #クレデンシャルファイルを利用の場合
