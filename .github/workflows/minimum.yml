@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  GOOGLE_APPLICATION_CREDENTIALS: ${GITHUB_WORKSPACE}/gcloud_credentials.json
+  GOOGLE_APPLICATION_CREDENTIALS: /gcloud_credentials.json
 
 jobs:
   terraform:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Set up Google Cloud authentication
         run: |
-          echo "${{ secrets.GCLOUD_CREDENTIALS }}" > gcloud_credentials.json
+          echo "${{ secrets.GCLOUD_CREDENTIALS }}" > /gcloud_credentials.json
           
       - name: Terraform Init
         run: terraform -chdir=terraform init
