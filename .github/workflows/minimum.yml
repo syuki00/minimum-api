@@ -19,7 +19,7 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_CREDENTIALS }}
         run: |
-          echo "${{ secrets.GCLOUD_CREDENTIALS }}" > gcloud_credentials.json
+          echo ${{ secrets.GCLOUD_CREDENTIALS }} > gcloud_credentials.json
           
       - name: Terraform Init
         run: terraform -chdir=terraform init
