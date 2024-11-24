@@ -10,19 +10,13 @@ terraform {
 
 # terraformで利用するプロバイダーの設定
 provider "google" {
-  credentials = file(var.credentials_file)
+  #credentials = file(var.credentials_file)
   #file("gcloud_credentials.json")
   #file("/home/yshida/.config/gcloud/application_default_credentials.json") 
   #クレデンシャルファイルを利用の場合
 
   project = "my-project-minimum-api"
   region  = "us-west1-a"
-}
-
-variable "credentials_file" {
-  description = "Path to the Google Cloud credentials file"
-  type        = string
-  default     = "gcloud_credentials.json"
 }
 
 resource "google_service_account" "default" {
