@@ -25,7 +25,7 @@ jobs:
         run: terraform -chdir=terraform init
 
       - name: Terraform Plan
-        run: terraform -chdir=terraform plan -var "credentials_file=gcloud_credentials.json" -out=tfplan
+        run: terraform -chdir=terraform plan -var "credentials_file=${GITHUB_WORKSPACE}/gcloud_credentials.json" -out=tfplan
 
 
 

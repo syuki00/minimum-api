@@ -20,7 +20,9 @@ provider "google" {
 }
 
 variable "credentials_file" {
-  default = "/home/yshida/.config/gcloud/application_default_credentials.json"
+  description = "Path to the Google Cloud credentials file"
+  type        = string
+  default     = "gcloud_credentials.json"
 }
 
 resource "google_service_account" "default" {
